@@ -140,3 +140,33 @@ terraform apply -var "content=This is a test content."
 ```sh
 terraform apply -var-file="other.tfvars"
 ```
+
+
+## 05 - Trabalhando com outputs
+
+Outputs são valores que podem ser extraídos do estado do terraform. Eles são úteis para extrair informações de recursos criados.
+
+```tf
+output "file_id" {
+  value = local_file.test_var.id
+}
+
+output "file_content" {
+  value = var.content
+}
+```
+
+## 06 - Data sources
+
+Data sources são recursos que podem ser utilizados para buscar informações de recursos já existentes. Eles são úteis para buscar informações de recursos que não foram criados pelo terraform.
+
+```tf
+data "local_file" "data-test_local" {
+  filename = "${path.module}/test_local.txt"
+}
+
+output "data-result" {
+  value = data.local_file.data-test_local.content
+}
+```
+
